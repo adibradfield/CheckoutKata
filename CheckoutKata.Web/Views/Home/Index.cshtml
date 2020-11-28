@@ -58,7 +58,10 @@
                                 @item.Offer.Description
                             </div>
                         }
-                        <button class="btn btn-primary">Add to basket</button>
+                        <form asp-controller="Home" asp-action="AddItemToBasket" asp-method="post">
+                            <input type="hidden" name="SKU" value="@item.SKU"/>
+                            <button class="btn btn-primary" type="submit">Add to basket</button>
+                        </form>
                     </div>
                 </div>
             </div>

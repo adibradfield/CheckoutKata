@@ -23,6 +23,11 @@ namespace CheckoutKata.Web.Controllers
             });
         }
 
+        [HttpPost]
+        public IActionResult AddItemToBasket(AddItemToBasketModel model){
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Privacy()
         {
             return View();
