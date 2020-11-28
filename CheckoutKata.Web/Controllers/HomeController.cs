@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CheckoutKata.Web.Models;
@@ -20,7 +17,10 @@ namespace CheckoutKata.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(new CheckoutViewModel{
+                AvailableStockItems = new IStockItem[]{new MockStockItem()},
+                Basket = new MockBasket()
+            });
         }
 
         public IActionResult Privacy()
@@ -33,5 +33,21 @@ namespace CheckoutKata.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+    }
+
+    class MockStockItem : IStockItem
+    {
+        public string SKU => "A";
+
+        public decimal UnitPrice => 10;
+
+        public IOffer Offer => null;
+    }
+
+    class MockBasket : IBasket
+    {
+        public IEnumerable<IBasketLineItem> LineItems => new IBasketLineItem[]{};
+
+        public decimal TotalPrice => 0;
     }
 }

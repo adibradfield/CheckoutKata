@@ -1,8 +1,67 @@
-﻿@{
+﻿@model CheckoutViewModel 
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+
+    @if (Model.Basket.LineItems.Any())
+    {
+        <div class="row">
+            <h2>Basket</h2>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">SKU</th>
+                        <th scope="col">Unit Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Line Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var line in Model.Basket.LineItems)
+                    {
+                        <tr>
+                            <th scope="row">@line.StockItem.SKU</th>
+                            <td>£@line.StockItem.UnitPrice</td>
+                            <td>@line.Quantity</td>
+                            <td>£@line.LinePrice</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="row">Total</th>
+                        <td>£@Model.Basket.TotalPrice</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    }
+
+    <div class="row">
+        <h2>Shop</h2>
+    </div>
+    <div class="row row-cols-sm-4">
+        @foreach (var item in Model.AvailableStockItems)
+        {
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.SKU</h5>
+                        <p class="card-text">£@item.UnitPrice</p>
+                        @if (item.Offer != null)
+                        {
+                            <div class="alert alert-info">
+                                @item.Offer.Description
+                            </div>
+                        }
+                        <button class="btn btn-primary">Add to basket</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
