@@ -6,5 +6,6 @@ namespace CheckoutKata.DomainModel
     {
         IEnumerable<IBasketLineItem> LineItems {get;}
         decimal TotalPrice {get;}
+        void AddItem(IStockItem item);
     }
 }
