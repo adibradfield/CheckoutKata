@@ -12,11 +12,11 @@ namespace CheckoutKata.DomainModel.UnitTests
         [SetUp]
         public void Setup()
         {
-            _mockStockItemA = GenerateMockStockItem("MockSkuA");
-            _mockStockItemB = GenerateMockStockItem("MockSkuB");
+            _mockStockItemA = GenerateMockStockItem("MockSkuA", 10);
+            _mockStockItemB = GenerateMockStockItem("MockSkuB", 3);
         }
 
-        private IStockItem GenerateMockStockItem(string mockSKU)
+        private IStockItem GenerateMockStockItem(string mockSKU, decimal unitPrice)
         {
             var mockItem = new Mock<IStockItem>();
             mockItem.Setup(m => m.SKU).Returns(mockSKU);
@@ -73,6 +73,48 @@ namespace CheckoutKata.DomainModel.UnitTests
             Assert.That(basket.LineItems.Count(), Is.EqualTo(2));
             AssertLineQuantity(basket, _mockStockItemA, 2);
             AssertLineQuantity(basket, _mockStockItemB, 1);
+        }
+
+        [Test]
+        public void TotalPrice_SingleItemA_10(){
+            var basket = new Basket();
+            basket.AddItem(_mockStockItemA);
+
+            var result = basket.TotalPrice;
+
+            Assert.That(result, Is.EqualTo(10));
+        }
+
+        [Test]
+        public void TotalPrice_SingleItemB_3(){
+            var basket = new Basket();
+            basket.AddItem(_mockStockItemB);
+
+            var result = basket.TotalPrice;
+
+            Assert.That(result, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void TotalPrice_TwoItemA_20(){
+            var basket = new Basket();
+            basket.AddItem(_mockStockItemA);
+            basket.AddItem(_mockStockItemA);
+
+            var result = basket.TotalPrice;
+
+            Assert.That(result, Is.EqualTo(20));
+        }
+
+        [Test]
+        public void TotalPrice_SingleItemASingleItemB_13(){
+            var basket = new Basket();
+            basket.AddItem(_mockStockItemA);
+            basket.AddItem(_mockStockItemB);
+
+            var result = basket.TotalPrice;
+
+            Assert.That(result, Is.EqualTo(13));
         }
 
         private static void AssertLineQuantity(Basket basket, IStockItem stockItem, int quantity)
