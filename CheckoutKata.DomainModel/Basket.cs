@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CheckoutKata.DomainModel
 {
@@ -7,7 +8,7 @@ namespace CheckoutKata.DomainModel
         private Dictionary<string, BasketLineItem> _lineItems = new Dictionary<string, BasketLineItem>();
         public IEnumerable<IBasketLineItem> LineItems => _lineItems.Values;
 
-        public decimal TotalPrice => throw new System.NotImplementedException();
+        public decimal TotalPrice => LineItems.Sum(l => l.LinePrice);
 
         public void AddItem(IStockItem item)
         {

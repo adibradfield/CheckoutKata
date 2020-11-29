@@ -20,6 +20,7 @@ namespace CheckoutKata.DomainModel.UnitTests
         {
             var mockItem = new Mock<IStockItem>();
             mockItem.Setup(m => m.SKU).Returns(mockSKU);
+            mockItem.Setup(m => m.UnitPrice).Returns(unitPrice);
             return mockItem.Object;
         }
 
