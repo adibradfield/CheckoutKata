@@ -5,7 +5,7 @@ namespace CheckoutKata.DomainModel.Promotions
         private readonly int _qualifyingQuantity;
         private readonly decimal _price;
 
-        public string Description => throw new System.NotImplementedException();
+        public string Description => $"{_qualifyingQuantity} for {_price}";
 
         public FixedPricePromotion(int qualifyingQuantity, decimal price)
         {
@@ -15,7 +15,10 @@ namespace CheckoutKata.DomainModel.Promotions
 
         public decimal CalculateDiscountToApply(IStockItem stockItem, int quantity)
         {
-            throw new System.NotImplementedException();
+            var fullPriceForQualifyingQuantity = stockItem.UnitPrice * _qualifyingQuantity;
+            var discountForQualifyingQuantity = fullPriceForQualifyingQuantity - _price;
+            var numberOfTimesToApplyDiscount = quantity / _qualifyingQuantity;
+            return discountForQualifyingQuantity * numberOfTimesToApplyDiscount;
         }
     }
 }
