@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CheckoutKata.DomainModel.UnitTests
 {
-    public class Tests
+    public class BasketTests
     {
         private IStockItem _mockStockItemA;
         private IStockItem _mockStockItemB;
