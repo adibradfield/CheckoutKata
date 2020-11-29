@@ -22,7 +22,7 @@ namespace CheckoutKata.DomainModel.UnitTests
         [TestCase(3.45, 2, 4, ExpectedResult=2.90)]
         public decimal LinePrice_WithPromotion_PromotionDiscountApplied(decimal unitPrice, int quantity, decimal discountToApply){
             var promotionMock = new Mock<IPromotion>();
-            promotionMock.Setup(m => m.CalculateDiscountToApply(quantity)).Returns(discountToApply);
+            promotionMock.Setup(m => m.CalculateDiscountToApply(It.IsAny<IStockItem>(), quantity)).Returns(discountToApply);
             var stockItemMock = new Mock<IStockItem>();
             stockItemMock.Setup(m => m.UnitPrice).Returns(unitPrice);
             stockItemMock.Setup(m => m.Promotion).Returns(promotionMock.Object);

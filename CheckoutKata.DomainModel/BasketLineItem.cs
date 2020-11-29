@@ -12,7 +12,7 @@ namespace CheckoutKata.DomainModel
             {
                 var basePrice = StockItem.UnitPrice * Quantity;
                 if(StockItem.Promotion != null){
-                    return basePrice - StockItem.Promotion.CalculateDiscountToApply(Quantity);
+                    return basePrice - StockItem.Promotion.CalculateDiscountToApply(StockItem, Quantity);
                 }
                 return basePrice;
             }
