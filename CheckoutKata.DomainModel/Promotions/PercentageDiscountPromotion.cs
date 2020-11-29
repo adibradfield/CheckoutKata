@@ -1,6 +1,6 @@
 namespace CheckoutKata.DomainModel.Promotions
 {
-    class PercentageDiscountPromotion : IPromotion
+    public class PercentageDiscountPromotion : IPromotion
     {
         private readonly int _qualifyingQuantity;
         private readonly decimal _percentageDiscount;

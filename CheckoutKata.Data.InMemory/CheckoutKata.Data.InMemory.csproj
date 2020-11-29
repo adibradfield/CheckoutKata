@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\CheckoutKata.DomainModel\CheckoutKata.DomainModel.csproj" />
+    <ProjectReference Include="..\CheckoutKata.Services\CheckoutKata.Services.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>
