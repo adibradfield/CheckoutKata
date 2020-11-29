@@ -6,7 +6,7 @@ namespace CheckoutKata.DomainModel
 
         public int Quantity { get; set; } = 1;
 
-        public decimal LinePrice => throw new System.NotImplementedException();
+        public decimal LinePrice => StockItem.UnitPrice * Quantity;
 
         public BasketLineItem(IStockItem item){
             StockItem = item;
