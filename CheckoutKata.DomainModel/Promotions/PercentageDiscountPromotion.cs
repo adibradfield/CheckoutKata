@@ -2,20 +2,23 @@ namespace CheckoutKata.DomainModel.Promotions
 {
     class PercentageDiscountPromotion : IPromotion
     {
-        private readonly int qualifyingQuantity;
-        private readonly decimal percentageDiscount;
+        private readonly int _qualifyingQuantity;
+        private readonly decimal _percentageDiscount;
 
-        public string Description => throw new System.NotImplementedException();
+        public string Description => $"{_percentageDiscount}% off for every {_qualifyingQuantity} purchased together";
 
         public PercentageDiscountPromotion(int qualifyingQuantity, decimal percentageDiscount)
         {
-            this.qualifyingQuantity = qualifyingQuantity;
-            this.percentageDiscount = percentageDiscount;
+            this._qualifyingQuantity = qualifyingQuantity;
+            this._percentageDiscount = percentageDiscount;
         }
 
         public decimal CalculateDiscountToApply(IStockItem stockItem, int quantity)
         {
-            throw new System.NotImplementedException();
+            var fullPriceForQualifyingQuantity = stockItem.UnitPrice * _qualifyingQuantity;
+            var discountForQualifyingQuantity = fullPriceForQualifyingQuantity * (_percentageDiscount / 100);
+            var numberOfTimesToApplyDiscount = quantity / _qualifyingQuantity;
+            return discountForQualifyingQuantity * numberOfTimesToApplyDiscount;
         }
     }
 }

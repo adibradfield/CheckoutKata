@@ -10,7 +10,7 @@ namespace CheckoutKata.DomainModel.UnitTests.Promotions
         public void CalculateDiscountToApply_LessThanQualifyingQuantity_NoDiscount(){
             var mockStockItem = new Mock<IStockItem>();
             mockStockItem.Setup(m => m.UnitPrice).Returns(20m);
-            var promotion = new PercentageDiscountPromotion(qualifyingQuantity: 3, percentageDiscount: 40);
+            var promotion = new PercentageDiscountPromotion(qualifyingQuantity: 3, percentageDiscount: 25);
 
             var result = promotion.CalculateDiscountToApply(mockStockItem.Object, 2);
 
@@ -21,7 +21,7 @@ namespace CheckoutKata.DomainModel.UnitTests.Promotions
         public void CalculateDiscountToApply_EqualsQualifyingQuantity_DiscountedBy20(){
             var mockStockItem = new Mock<IStockItem>();
             mockStockItem.Setup(m => m.UnitPrice).Returns(20m);
-            var promotion = new PercentageDiscountPromotion(qualifyingQuantity: 3, percentageDiscount: 40);
+            var promotion = new PercentageDiscountPromotion(qualifyingQuantity: 3, percentageDiscount: 25);
 
             var result = promotion.CalculateDiscountToApply(mockStockItem.Object, 3);
 
@@ -32,7 +32,7 @@ namespace CheckoutKata.DomainModel.UnitTests.Promotions
         public void CalculateDiscountToApply_GreaterThanQualifyingQuantity_DiscountedBy20(){
             var mockStockItem = new Mock<IStockItem>();
             mockStockItem.Setup(m => m.UnitPrice).Returns(20m);
-            var promotion = new PercentageDiscountPromotion(qualifyingQuantity: 3, percentageDiscount: 40);
+            var promotion = new PercentageDiscountPromotion(qualifyingQuantity: 3, percentageDiscount: 25);
 
             var result = promotion.CalculateDiscountToApply(mockStockItem.Object, 5);
 
@@ -43,7 +43,7 @@ namespace CheckoutKata.DomainModel.UnitTests.Promotions
         public void CalculateDiscountToApply_DoubleQualifyingQuantity_DiscountedBy40(){
             var mockStockItem = new Mock<IStockItem>();
             mockStockItem.Setup(m => m.UnitPrice).Returns(20m);
-            var promotion = new PercentageDiscountPromotion(qualifyingQuantity: 3, percentageDiscount: 40);
+            var promotion = new PercentageDiscountPromotion(qualifyingQuantity: 3, percentageDiscount: 25);
 
             var result = promotion.CalculateDiscountToApply(mockStockItem.Object, 6);
 
