@@ -4,6 +4,6 @@ namespace CheckoutKata.DomainModel
     {
         string SKU {get;}
         decimal UnitPrice {get;}
-        IOffer Offer {get;}
+        IPromotion Promotion {get;}
     }
 }

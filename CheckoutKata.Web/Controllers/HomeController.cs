@@ -47,7 +47,7 @@ namespace CheckoutKata.Web.Controllers
 
         public decimal UnitPrice => 10;
 
-        public IOffer Offer => null;
+        public IPromotion Promotion => null;
     }
 
     class MockBasket : IBasket

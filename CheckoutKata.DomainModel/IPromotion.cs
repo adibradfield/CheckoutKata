@@ -1,6 +1,6 @@
 namespace CheckoutKata.DomainModel
 {
-    public interface IOffer
+    public interface IPromotion
     {
         string Description {get;}
     }

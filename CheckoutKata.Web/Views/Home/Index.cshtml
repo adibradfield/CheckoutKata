@@ -52,10 +52,10 @@
                     <div class="card-body">
                         <h5 class="card-title">@item.SKU</h5>
                         <p class="card-text">£@item.UnitPrice</p>
-                        @if (item.Offer != null)
+                        @if (item.Promotion != null)
                         {
                             <div class="alert alert-info">
-                                @item.Offer.Description
+                                @item.Promotion.Description
                             </div>
                         }
                         <form asp-controller="Home" asp-action="AddItemToBasket" asp-method="post">
