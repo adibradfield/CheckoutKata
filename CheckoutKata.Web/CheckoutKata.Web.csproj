@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CheckoutKata.Services\CheckoutKata.Services.csproj" />
     <ProjectReference Include="..\CheckoutKata.DomainModel\CheckoutKata.DomainModel.csproj" />
+    <ProjectReference Include="..\CheckoutKata.Data.InMemory\CheckoutKata.Data.InMemory.csproj" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>

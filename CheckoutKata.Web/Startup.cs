@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CheckoutKata.Data.InMemory;
+using CheckoutKata.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +26,9 @@ namespace CheckoutKata.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<IBasketRepository, InMemoryBasketRepository>();
+            services.AddSingleton<IStockItemRepository, InMemoryStockItemRepository>();
+            services.AddTransient<ICheckoutService, CheckoutService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

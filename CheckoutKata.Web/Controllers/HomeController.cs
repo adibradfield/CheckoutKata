@@ -1,31 +1,33 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CheckoutKata.Web.Models;
-using CheckoutKata.DomainModel;
+using CheckoutKata.Services;
 
 namespace CheckoutKata.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICheckoutService _checkoutService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICheckoutService checkoutService)
         {
             _logger = logger;
+            this._checkoutService = checkoutService;
         }
 
         public IActionResult Index()
         {
             return View(new CheckoutViewModel{
-                AvailableStockItems = new IStockItem[]{new MockStockItem()},
-                Basket = new MockBasket()
+                AvailableStockItems = _checkoutService.GetAvailableStockItems(),
+                Basket = _checkoutService.GetCurrentBasket()
             });
         }
 
         [HttpPost]
         public IActionResult AddItemToBasket(AddItemToBasketModel model){
+            _checkoutService.AddItemToBasket(model.SKU);
             return RedirectToAction("Index");
         }
 
@@ -39,21 +41,5 @@ namespace CheckoutKata.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-    }
-
-    class MockStockItem : IStockItem
-    {
-        public string SKU => "A";
-
-        public decimal UnitPrice => 10;
-
-        public IPromotion Promotion => null;
-    }
-
-    class MockBasket : IBasket
-    {
-        public IEnumerable<IBasketLineItem> LineItems => new IBasketLineItem[]{};
-
-        public decimal TotalPrice => 0;
     }
 }
